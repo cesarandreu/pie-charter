@@ -7,7 +7,8 @@ var data = {
 
 var idCount = 0;
 
-var templateString = $('#table-template').text();
+//var templateString = $('#table-template').text();
+var templateString = table_template;
 
 $('#addSlice').on('click', function() {
     //Gets their values
@@ -18,12 +19,20 @@ $('#addSlice').on('click', function() {
     $('#sliceName').val('');
     $('#sliceValue').val('');
 
-    //Puts the combination in the array
-    data.slices.push({name: sliceName, value: sliceValue, id: idCount});
-    idCount++;
+        if (sliceName.length>0 && !isNaN(parseFloat(sliceValue)) ) {
 
-    var output = _.template(templateString, data);
-    $('#sliceList').html(output);
+            //Puts the combination in the array
+            data.slices.push({name: sliceName, value: sliceValue, id: idCount});
+            idCount++;
+
+            var output = _.template(templateString, data);
+            $('#sliceList').html(output);
+
+        } else {
+
+            $('#warning').html(bad_slice);
+
+        }
 
 });
 
@@ -50,8 +59,13 @@ $(document).on('click', '#slicesTable tr', function() {
 
 
 $('#createChart').on('click', function() {
-    $('#chartInfo').val(JSON.stringify(data.slices));
-    $('#chartForm').submit();
+    if ((data.slices.length>0) && ($('#chartAuthor').val().length>0) && ($('#chartTitle').val().length>0)) {
+        $('#chartInfo').val(JSON.stringify(data.slices));
+        $('#chartForm').submit();
+    } else {
+        $('#warning').html(warning_template);
+    }
+
 });
 
 });

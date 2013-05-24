@@ -1,11 +1,18 @@
-ul
-    li
-        a(href="/") Home
-        a(href="/authors") Author list 
+extends ../layout
 
-h1 #{author}'s Charts
+block scripts
 
-ul
-    each item in list
-        li 
-            a(href='/charts/#{item._id}') #{item.title}
+block navigation
+    li: a(href="/") Home
+    li: a(href="/charts") Chart list
+    li: a(href="/authors") Author list
+
+block content
+    div.offset1
+
+        h3 #{author}'s Charts
+
+        ul
+            each item in list
+                li 
+                    a(href='/charts/#{item._id}') #{item.title}

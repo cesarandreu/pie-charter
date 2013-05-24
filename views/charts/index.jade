@@ -1,12 +1,21 @@
-ul
-    li
-        a(href="/") Back home
-    li
-        a(href="/charts/new") Create new chart  
+extends ../layout
 
-h1 All Charts
+block scripts
 
-ul
-    each chart in charts
-        li 
-            a(href='/charts/#{chart._id}') #{chart.author} - #{chart.title}
+block navigation
+    li: a(href="/") Home
+    li.active: a(href="/charts") Chart list
+    li: a(href="/authors") Author list
+
+
+block content
+    div.offset1
+        h3 Chart list
+        ul
+            each chart in charts
+                li 
+                    a(href='/charts/#{chart._id}') #{chart.title} by #{chart.author}
+        a.btn.btn-primary(href="/charts/new") Create new chart  
+
+
+

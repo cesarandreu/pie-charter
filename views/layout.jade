@@ -1,0 +1,25 @@
+doctype 5
+html
+    head
+        meta(name="viewport", content="width=device-width, initial-scale=1.0")
+        link(rel="stylesheet", type="text/css", href="/css/bootstrap.min.css")
+        script(type="text/javascript", src="//ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js")
+        script(type="text/javascript", src="/javascripts/bootstrap.min.js")
+        script(type="text/javascript", src="/javascripts/highcharts.js")
+        script(type="text/javascript", src="/javascripts/underscore-min.js")
+        block scripts
+
+        style
+            .center{
+                text-align: center;
+            }
+    body
+        div.container
+
+            div.masthead
+                ul.nav.nav-pills.pull-right
+                    block navigation
+                h1 Pie-Charter
+
+            hr
+            block content

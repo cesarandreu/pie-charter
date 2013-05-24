@@ -1,6 +1,6 @@
 $(document).ready(function() {
 
-    var templateString = $('#table-template').text();
+    var templateString = table_template;
 
     var data = {
         slices: []
@@ -29,12 +29,21 @@ $(document).ready(function() {
         $('#sliceName').val('');
         $('#sliceValue').val('');
 
-        //Puts the combination in the array
-        data.slices.push({name: sliceName, value: sliceValue, id: idCount});
-        idCount++;
+        if (sliceName.length>0 && !isNaN(parseFloat(sliceValue)) ) {
 
-        var output = _.template(templateString, data);
-        $('#sliceList').html(output);
+            //Puts the combination in the array
+            data.slices.push({name: sliceName, value: sliceValue, id: idCount});
+            idCount++;
+
+            var output = _.template(templateString, data);
+            $('#sliceList').html(output);
+
+        } else {
+
+            $('#warning').html(bad_slice);
+
+        }
+
 
     });
 
@@ -59,8 +68,14 @@ $(document).ready(function() {
     });
 
     $('#updateChart').on('click', function() {
-        $('#chartInfo').val(JSON.stringify(data.slices));
-        $('#chartForm').submit();
+
+        if ((data.slices.length>0) && ($('#chartAuthor').val().length>0) && ($('#chartTitle').val().length>0)) {
+            $('#chartInfo').val(JSON.stringify(data.slices));
+            $('#chartForm').submit();
+        } else {
+            $('#warning').html(warning_template);
+        }
+
     });
 
 });

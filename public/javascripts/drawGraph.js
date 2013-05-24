@@ -4,18 +4,11 @@ $(document).ready(function() {
     var chartTitle = $('#chartTitle').val();
 
     var dataArray = [];
-
-    var total = 0;
     var i;
-    for (i = 0; i < chartInfo.length; i++) {
-        total += chartInfo[i].value;
-    }
 
     for (i = 0; i < chartInfo.length; i++) {
-        dataArray.push([chartInfo[i].name, (chartInfo[i].value / total)]);
+        dataArray.push([chartInfo[i].name, chartInfo[i].value*1]);
     }
-
-
 
     $('#container').highcharts({
         chart: {

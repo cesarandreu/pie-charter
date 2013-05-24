@@ -64,7 +64,6 @@ app.get('/authors', function(req, res) {
 app.param('authorId', function(req, res, next, authorId) {
   Chart.find({author: authorId}, function(err, result) {
     req.charts = result;
-    console.log(JSON.stringify(req.charts));
     next();
   });
 });

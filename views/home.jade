@@ -1,6 +1,13 @@
-h1 Welcome to Pie-Charter!
-ul
-    li
-        a(href="/charts") Chart list
-    li
-        a(href="/authors") Author list
+extends layout
+
+block scripts
+
+block navigation
+    li.active: a(href="/") Home
+    li: a(href="/charts") Chart list
+    li: a(href="/authors") Author list
+
+block content
+    div.offset1
+        h3: a(href="/charts") Chart list
+        h3: a(href="/authors") Author list

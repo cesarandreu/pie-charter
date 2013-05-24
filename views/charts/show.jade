@@ -1,29 +1,29 @@
-doctype 5
-html
-    head
-        script(type="text/javascript", src="//ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js")
-        script(type="text/javascript", src="/javascripts/highcharts.js")
-        script(type="text/javascript", src="/javascripts/exporting.js")
-        script(type="text/javascript", src="/javascripts/underscore-min.js")
-        script(type="text/javascript", src="/javascripts/drawGraph.js")
-    body
-        ul
-            li
-                a(href="/") Home
-            li
-                a(href="/charts") Chart list  
-        h1 #{chart.title} by #{chart.author}
+extends ../layout
+
+block scripts
+    script(type="text/javascript", src="/javascripts/drawGraph.js")
+    script(type="text/javascript", src="/javascripts/template.js")
+
+block navigation
+    li: a(href="/") Home
+    li: a(href="/charts") Chart list
+    li: a(href="/authors") Author list
+
+block content
+    div.offset1
+        h3 #{chart.title}
+            small  by 
+            small: a.muted(href="/authors/#{chart.author}") #{chart.author}
 
         input#chartInfo(type="hidden", name="chartInfo", value="#{chart.info}")
         input#chartTitle(type="hidden", name="chartTitle", value="#{chart.title}")
         input#chartAuthor(type="hidden", name="chartAuthor", value="#{chart.author}")
-            
-        ul
-            li
-                a(href="/charts/#{chart._id}/edit") Edit
-            li
-                form(method="POST", action="/charts/#{chart._id}")
-                    input(type="hidden", name="_method", value="DELETE")
-                    button(type="submit") Delete
+        
+        div#container
 
-        div#container(style="min-width: 400px; height: 400px;")
+        div.form-actions
+
+            form(method="POST", action="/charts/#{chart._id}")
+                a(href="/charts/#{chart._id}/edit").btn.btn-primary Edit chart
+                input(type="hidden", name="_method", value="DELETE")
+                button.btn(type="submit") Delete chart
