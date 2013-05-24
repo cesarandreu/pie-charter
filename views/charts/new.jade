@@ -1,0 +1,45 @@
+doctype 5
+html
+    head
+        script(type="text/javascript", src="//ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js")
+        script(type="text/javascript", src="/javascripts/highcharts.js")
+        script(type="text/javascript", src="/javascripts/underscore-min.js")
+        script(type="text/javascript", src="/javascripts/sliceList.js")
+        script(id="table-template")
+            <table id='slicesTable' border='1'>
+                <tr>
+                    <td><b>Slice Name</b></td>
+                    <td><b>Slice Value</b></td>
+                </tr>
+                
+                <% _.each (slices, function (obj) { %>
+                    
+                    <tr data-id=<%= obj.id %>>
+                        <td id='name'><%= obj.name %></td>
+                        <td id='value'><%= obj.value %></td>
+                    </tr>
+                
+                <% }); %>
+            </table>
+            <p>Click on an item to remove it from the list.</p>
+    body
+
+        h1 New Chart
+
+        form(id="chartForm", method="POST", action="/charts")
+            input#chartInfo(type="hidden", name="chartInfo")
+            p Author
+                input#chartAuthor(type="text", name="chartAuthor", placeholder="author name")
+            p Title
+                input#chartTitle(type="text", name="chartTitle", placeholder="chart title")
+            p Slice name
+                input#sliceName(type="text", name="slice-name", placeholder="slice name")
+            p Slice value
+                input#sliceValue(type="number", name="slice-value", placeholder="slice number")
+            p
+                button#addSlice(type="button") Add slice
+            p
+                button#createChart(type="button") Create chart
+
+            div#sliceList
+

@@ -1,0 +1,11 @@
+ul
+    li
+        a(href="/") Home
+        a(href="/authors") Author list 
+
+h1 #{author}'s Charts
+
+ul
+    each item in list
+        li 
+            a(href='/charts/#{item._id}') #{item.title}

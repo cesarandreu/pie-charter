@@ -1,0 +1,12 @@
+ul
+    li
+        a(href="/") Back home
+    li
+        a(href="/charts/new") Create new chart  
+
+h1 All Charts
+
+ul
+    each chart in charts
+        li 
+            a(href='/charts/#{chart._id}') #{chart.author} - #{chart.title}
